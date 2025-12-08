@@ -39,6 +39,8 @@ int *create_and_return_array(int array_size, char *args[]) {
   return integer_array;
 }
 
+void bubble_sort(int *arr, int size);
+
 int main(int argc, char *argv[]) {
 
   int array_size = argc - 1;
@@ -62,6 +64,28 @@ int main(int argc, char *argv[]) {
     printf("Index %d: %d\n", i, integer_array[i]);
   }
 
+  bubble_sort(integer_array, array_size);
+
   free(integer_array);
   return 0;
 }
+
+void bubble_sort(int *arr, int size) {
+// something here
+  int pointer1 = 0;
+  int pointer2 = 1;
+  bool changeMade = false;
+
+  do {
+  for (int i = 0; i < size; i++) {
+    if (arr[pointer1] > arr[pointer2]) {
+      changeMade = true;
+      int temp = arr[pointer1];
+      arr[pointer1] = arr[pointer2];
+      arr[pointer2] = temp;
+    }
+  }
+  } while (changeMade == false)
+}
+
+
