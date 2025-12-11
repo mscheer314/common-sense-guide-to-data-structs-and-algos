@@ -1,4 +1,5 @@
 #include <errno.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -29,7 +30,7 @@ int *create_and_return_array(int array_size, char *args[]) {
 
     if (errno != 0 || *endptr != '\0') {
       fprintf(stderr, "Error: Argument '%s' is not a valid integer. \n",
-              args[i + 1]);
+              args[i]);
       free(integer_array);
       return NULL;
     }
@@ -66,26 +67,27 @@ int main(int argc, char *argv[]) {
 
   bubble_sort(integer_array, array_size);
 
+  for (int i = 0; i < array_size; i++) {
+    printf("%d ", integer_array[i]);
+  }
+  printf("\n");
+
   free(integer_array);
   return 0;
 }
 
 void bubble_sort(int *arr, int size) {
-// something here
-  int pointer1 = 0;
-  int pointer2 = 1;
-  bool changeMade = false;
+  bool changeMade;
 
   do {
-  for (int i = 0; i < size; i++) {
-    if (arr[pointer1] > arr[pointer2]) {
-      changeMade = true;
-      int temp = arr[pointer1];
-      arr[pointer1] = arr[pointer2];
-      arr[pointer2] = temp;
+    changeMade = false;
+    for (int i = 0; i < size - 1; i++) {
+      if (arr[i] > arr[i + 1]) {
+        changeMade = true;
+        int temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
+      }
     }
-  }
-  } while (changeMade == false)
+  } while (changeMade == true);
 }
-
-
